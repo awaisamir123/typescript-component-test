@@ -1,13 +1,12 @@
 import React from 'react';
-
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Menu from './components/Menu';
+import Home from './pages/Home';
 
 function App() {
   return (
     <div>
-      <Menu />
+      <Home/>
     </div>
   );
 }

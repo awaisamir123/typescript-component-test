@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../App.css";
 import { Dropdown } from "react-bootstrap";
-import { Select, Space } from "antd";
 import List from "./List";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 
@@ -22,14 +21,14 @@ const Menu = () => {
     setView(false);
   };
 
-  const subtract = () => {
+  const subtraction = () => {
     const keys = Object.keys(selected);
     const lastKey: any = keys[keys.length - 1];
     delete selected[lastKey];
     setSelected((pre: any) => ({ ...pre, [index]: index++ }));
   };
 
-  const Addition = () => {
+  const addition = () => {
     setView(true);
   };
 
@@ -45,7 +44,7 @@ const Menu = () => {
           {selected ? <List key={index} selected={selected} /> : null}
           {view ? (
             <>
-              <Dropdown className="ml-auto mt-3">
+              <Dropdown className="ml-auto" style={{marginTop:"10px"}}>
                 <Dropdown.Toggle variant="none" className="border" id="dropdown-basic">
                   Select Filter
                 </Dropdown.Toggle>
@@ -70,13 +69,13 @@ const Menu = () => {
           >
             {array1.every((elem) => array2.includes(elem)) ? null : (
               <GrAddCircle
-                onClick={Addition}
+                onClick={addition}
                 data-testid={"add-icon"}
                 style={{ width: "20px", height: "20px" }}
               ></GrAddCircle>
             )}
             <GrSubtractCircle
-              onClick={subtract}
+              onClick={subtraction}
               data-testid={"delete-icon"}
               style={{ width: "20px", height: "20px" }}
             ></GrSubtractCircle>
