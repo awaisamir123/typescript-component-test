@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../App.css';
 import { Button, Dropdown, Form } from 'react-bootstrap';
 import List from './list';
+import { GrAddCircle, GrSubtractCircle } from "react-icons/gr"
+
 interface Menu {
     name: string;
     fields: string[];
@@ -36,7 +38,7 @@ const FinalMenu: React.FC = () => {
 
         // })
         // Filter = data;
-        console.log("Filter", data)
+        //console.log("Filter", data)
 
     }
 
@@ -49,8 +51,8 @@ const FinalMenu: React.FC = () => {
         delete selected[lastKey];
         setSelected((pre: any) => ({ ...pre, [index]: index++ }));
         // Object.keys(arr).pop();
-        // console.log("array", arr)
-        console.log("selected", selected.index)
+        // //console.log("array", arr)
+        //console.log("selected", selected.index)
 
     }
 
@@ -59,14 +61,20 @@ const FinalMenu: React.FC = () => {
         setView(true)
 
     }
-    // console.log("selected", selected)
+    // //console.log("selected", selected)
     //const [currentMenu, setCurrentMenu] = useState<any>(FinalMenu)
     return (
         <>
             <div style={{ display: "flex" }}>
-                {view ? <Dropdown  >
+
+                {selected ? (
+                    <List key={index} selected={selected} Filter={Filter} />
+                ) : (
+                    null
+                )}
+                {view ? <Dropdown className='ml-auto'>
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Dropdown Button
+                        Select Filter
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         {
@@ -78,14 +86,11 @@ const FinalMenu: React.FC = () => {
                         }
                     </Dropdown.Menu>
                 </Dropdown> : null}
-                {selected ? (
-                    <List key={index} selected={selected} Filter={Filter} />
-                ) : (
-                    null
-                )}
+                <div style={{ marginTop: "0.4%", display: "flex" }}>
+                    <GrAddCircle onClick={Addition} style={{ width: "20px", height: "20px" }}></GrAddCircle>
+                    <GrSubtractCircle onClick={subtract} style={{ width: "20px", height: "20px" }}></GrSubtractCircle>
+                </div>
 
-                <Button onClick={Addition} >+</Button>
-                <Button onClick={subtract}>-</Button>
             </div>
         </>
     );

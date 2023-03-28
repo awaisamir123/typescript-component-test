@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css';
 import { Button, Dropdown, Form } from 'react-bootstrap';
-
+import { GrAddCircle, GrSubtractCircle } from "react-icons/gr"
 const options = [
     { label: "Option 1", value: "1" },
     { label: "Option 2", value: "2" },
@@ -9,7 +9,7 @@ const options = [
 ];
 
 const List: any = (selected: any, Filter: any) => {
-    console.log("selected childdddddddd", selected.selected)
+    //console.log("selected childdddddddd", selected.selected)
     return (
         Object.keys(selected.selected).map((item: string, index: number) => {
 
@@ -20,7 +20,7 @@ const List: any = (selected: any, Filter: any) => {
 
                         <Dropdown >
                             <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                                type
+                                Type
                             </Dropdown.Toggle>
                         </Dropdown >
 
@@ -30,11 +30,13 @@ const List: any = (selected: any, Filter: any) => {
                                     {option.label}
                                 </option>
                             ))}
-                        </select></div >)
+                        </select>
+                        <GrSubtractCircle style={{ width: "20px", height: "20px" }} /></div >)
             }
             else if (item == "Status") {
                 return (
-                    <div>
+                    <div style={{ display: "flex" }}>
+
                         <Dropdown >
                             <Dropdown.Toggle variant="primary" id="dropdown-basic">
                                 Status
@@ -47,10 +49,11 @@ const List: any = (selected: any, Filter: any) => {
                                     {option.label}
                                 </option>
                             ))}
-                        </select></div >)
+                        </select>
+                        <GrSubtractCircle style={{ width: "20px", height: "20px" }} /></div >)
             }
             else if (item == "Amount") {
-                return (<div>
+                return (<div style={{ display: "flex" }} >
 
                     <Dropdown >
                         <Dropdown.Toggle variant="primary" id="dropdown-basic">
@@ -70,10 +73,11 @@ const List: any = (selected: any, Filter: any) => {
                         value={100}
                     //onChange={(e) => onChange([value[0], e.target.value])}
                     />
+                    <GrSubtractCircle style={{ width: "20px", height: "20px" }} />
                 </div>)
             }
             else if (item == "Date") {
-                return (<div>
+                return (<div style={{ display: "flex" }}>
 
                     <Dropdown >
                         <Dropdown.Toggle variant="primary" id="dropdown-basic">
@@ -91,6 +95,7 @@ const List: any = (selected: any, Filter: any) => {
                         value={Date.now()}
                     //onChange={(e) => onChange([Date.now(), e.target.value])}
                     />
+                    <GrSubtractCircle style={{ width: "20px", height: "20px" }} />
                 </div>)
             }
             else {
