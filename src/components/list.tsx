@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
 import '../App.css';
-import { Button, Dropdown, Form } from 'react-bootstrap';
+import { Button, Dropdown, Form, Col } from 'react-bootstrap';
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr"
 const options = [
-    { label: "Option 1", value: "1" },
-    { label: "Option 2", value: "2" },
-    { label: "Option 3", value: "3" },
+    { label: "String", value: "1" },
+    { label: "Number", value: "2" },
+    { label: "Boolean", value: "3" },
 ];
 
-const List: any = (selected: any, Filter: any) => {
-    //console.log("selected childdddddddd", selected.selected)
+const options2 = [
+    { label: "Regidential ", value: "1" },
+    { label: "Real Estate", value: "2" },
+    { label: "Compliance Review ", value: "3" },
+];
+
+const List: any = (selected: any, setSelected: any) => {
+    const [field, setField] = useState<any>()
     return (
-        Object.keys(selected.selected).map((item: string, index: number) => {
+        Object.keys(selected.selected)?.map((item: string, index: number) => {
 
             if (item == "type") {
                 return (
-
-                    <div style={{ display: "flex" }}>
-
+                    <div key={index} style={{ display: "flex", alignItems: "baseline" }} >
                         <Dropdown >
                             <Dropdown.Toggle variant="primary" id="dropdown-basic">
                                 Type
@@ -31,11 +35,11 @@ const List: any = (selected: any, Filter: any) => {
                                 </option>
                             ))}
                         </select>
-                        <GrSubtractCircle style={{ width: "20px", height: "20px" }} /></div >)
+                    </div >)
             }
             else if (item == "Status") {
                 return (
-                    <div style={{ display: "flex" }}>
+                    <div key={index} style={{ display: "flex", alignItems: "baseline" }}>
 
                         <Dropdown >
                             <Dropdown.Toggle variant="primary" id="dropdown-basic">
@@ -44,16 +48,18 @@ const List: any = (selected: any, Filter: any) => {
                         </Dropdown >
 
                         <select multiple >
-                            {options.map((option) => (
+                            {options2.map((option) => (
                                 <option key={option.value} value={option.value}>
                                     {option.label}
                                 </option>
                             ))}
                         </select>
-                        <GrSubtractCircle style={{ width: "20px", height: "20px" }} /></div >)
+
+                    </div >
+                )
             }
             else if (item == "Amount") {
-                return (<div style={{ display: "flex" }} >
+                return (<div key={index} style={{ display: "flex", alignItems: "baseline" }} >
 
                     <Dropdown >
                         <Dropdown.Toggle variant="primary" id="dropdown-basic">
@@ -73,11 +79,11 @@ const List: any = (selected: any, Filter: any) => {
                         value={100}
                     //onChange={(e) => onChange([value[0], e.target.value])}
                     />
-                    <GrSubtractCircle style={{ width: "20px", height: "20px" }} />
+
                 </div>)
             }
             else if (item == "Date") {
-                return (<div style={{ display: "flex" }}>
+                return (<div key={index} style={{ display: "flex", alignItems: "baseline" }}>
 
                     <Dropdown >
                         <Dropdown.Toggle variant="primary" id="dropdown-basic">
@@ -95,7 +101,7 @@ const List: any = (selected: any, Filter: any) => {
                         value={Date.now()}
                     //onChange={(e) => onChange([Date.now(), e.target.value])}
                     />
-                    <GrSubtractCircle style={{ width: "20px", height: "20px" }} />
+
                 </div>)
             }
             else {
