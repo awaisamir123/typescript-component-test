@@ -4,8 +4,8 @@ import { Dropdown } from "react-bootstrap";
 import List from "./List";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 
-const FinalMenu = () => {
-  let Filter: any = {
+const Menu = () => {
+  let Filter = {
     Date: Date,
     type: String,
     Status: String,
@@ -13,18 +13,17 @@ const FinalMenu = () => {
   };
   const [selected, setSelected] = useState<any>([]);
   const [view, setView] = useState<boolean>(true);
-  let index = 0;
 
+  let index = 0;
   const inputhandler = (e: any) => {
-    const name: any = e.target.name;
-    const value: any = e.target.value;
-    setSelected((pre: any) => ({ ...pre, [name]: name }));
+    const name: string = e.target.name;
+    setSelected((pre: string[]) => ({ ...pre, [name]: name }));
     setView(false);
   };
 
   const subtract = () => {
     const keys = Object.keys(selected);
-    const lastKey = keys[keys.length - 1];
+    const lastKey: any = keys[keys.length - 1];
     delete selected[lastKey];
     setSelected((pre: any) => ({ ...pre, [index]: index++ }));
   };
@@ -32,6 +31,11 @@ const FinalMenu = () => {
   const Addition = () => {
     setView(true);
   };
+
+  let array1: string | string[] = [];
+  let array2: string | string[] = [];
+  array1 = Object.keys(Filter);
+  array2 = Object.keys(selected);
 
   return (
     <>
@@ -61,11 +65,13 @@ const FinalMenu = () => {
           <div
             style={{ marginTop: "0.4%", display: "flex", marginLeft: "50px" }}
           >
-            <GrAddCircle
-              onClick={Addition}
-              data-testid={"add-icon"}
-              style={{ width: "20px", height: "20px" }}
-            ></GrAddCircle>
+            {array1.every((elem) => array2.includes(elem)) ? null : (
+              <GrAddCircle
+                onClick={Addition}
+                data-testid={"add-icon"}
+                style={{ width: "20px", height: "20px" }}
+              ></GrAddCircle>
+            )}
             <GrSubtractCircle
               onClick={subtract}
               data-testid={"delete-icon"}
@@ -78,4 +84,4 @@ const FinalMenu = () => {
   );
 };
 
-export default FinalMenu;
+export default Menu;

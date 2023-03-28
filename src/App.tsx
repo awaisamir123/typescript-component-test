@@ -2,12 +2,12 @@ import React from 'react';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import FinalMenu from './components/FinalMenu';
+import Menu from './components/Menu';
 
 function App() {
   return (
     <div>
-      <FinalMenu />
+      <Menu />
     </div>
   );
 }
