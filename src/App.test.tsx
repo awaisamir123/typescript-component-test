@@ -1,8 +1,8 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import App from "./App";
-import FinalMenu from "./components/finalMenu";
-import List from "./components/list";
+import FinalMenu from "./components/FinalMenu";
+import List from "./components/List";
 
 test("renders select filter in the component", () => {
   render(<FinalMenu />);
