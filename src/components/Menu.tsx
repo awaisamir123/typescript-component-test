@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../App.css";
 import { Dropdown } from "react-bootstrap";
+import { Select, Space } from "antd";
 import List from "./List";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 
@@ -39,31 +40,33 @@ const Menu = () => {
 
   return (
     <>
-      <div className="container m-5">
+      <div className="container-fluid m-5">
         <div style={{ display: "flex" }}>
           {selected ? <List key={index} selected={selected} /> : null}
           {view ? (
-            <Dropdown className="ml-auto">
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Select Filter
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                {Object.keys(Filter).map((item, index) => {
-                  return (
-                    <Dropdown.Item
-                      key={index}
-                      onClick={inputhandler}
-                      name={item}
-                    >
-                      {Object.keys(selected).includes(item) ? null : item}
-                    </Dropdown.Item>
-                  );
-                })}
-              </Dropdown.Menu>
-            </Dropdown>
+            <>
+              <Dropdown className="ml-auto mt-3">
+                <Dropdown.Toggle variant="none" className="border" id="dropdown-basic">
+                  Select Filter
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {Object.keys(Filter).map((item, index) => {
+                    return (
+                      <Dropdown.Item
+                        key={index}
+                        onClick={inputhandler}
+                        name={item}
+                      >
+                        {Object.keys(selected).includes(item) ? null : item}
+                      </Dropdown.Item>
+                    );
+                  })}
+                </Dropdown.Menu>
+              </Dropdown>
+            </>
           ) : null}
           <div
-            style={{ marginTop: "0.4%", display: "flex", marginLeft: "50px" }}
+            style={{ marginTop: "20px", display: "flex", marginLeft: "50px" }}
           >
             {array1.every((elem) => array2.includes(elem)) ? null : (
               <GrAddCircle

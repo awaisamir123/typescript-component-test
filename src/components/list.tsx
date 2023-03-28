@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 import { Dropdown } from "react-bootstrap";
+import { MultiSelect } from "react-multi-select-component";
 type Option = {
   label: string;
   value: string;
@@ -14,19 +15,20 @@ type ListProps = {
   selected: Selected;
 };
 
-const options: Option[] = [
-  { label: "String", value: "1" },
-  { label: "Number", value: "2" },
-  { label: "Boolean", value: "3" },
-];
-
 const options2: Option[] = [
   { label: "Residential", value: "1" },
   { label: "Real Estate", value: "2" },
   { label: "Compliance Review", value: "3" },
 ];
 
+const options: Option[] = [
+  { label: "Grapes", value: "grapes" },
+  { label: "Mango", value: "mango" },
+  { label: "Strawberry", value: "strawberry" },
+];
+
 const List: React.FC<ListProps> = ({ selected }) => {
+  const [selectedValue, setSelectedValue] = useState<any>([]);
   return (
     <div style={{ display: "flex" }}>
       {Object.keys(selected)?.map((item: string, index: number) => {
@@ -34,21 +36,28 @@ const List: React.FC<ListProps> = ({ selected }) => {
           return (
             <div
               key={index}
-              style={{ display: "flex", alignItems: "baseline" }}
+              style={{
+                display: "flex",
+                alignItems: "baseline",
+                margin: "10px",
+              }}
             >
               <Dropdown>
-                <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                <Dropdown.Toggle
+                  variant="none"
+                  id="dropdown-basic"
+                  className="form-control"
+                >
                   Type
                 </Dropdown.Toggle>
               </Dropdown>
 
-              <select multiple>
-                {options.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+              <MultiSelect
+                options={options}
+                value={selectedValue}
+                onChange={setSelectedValue}
+                labelledBy="Select"
+              />
             </div>
           );
         } else if (item === "Status") {
@@ -62,12 +71,16 @@ const List: React.FC<ListProps> = ({ selected }) => {
               }}
             >
               <Dropdown>
-                <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                <Dropdown.Toggle
+                  variant="none"
+                  className="form-control"
+                  id="dropdown-basic"
+                >
                   Status
                 </Dropdown.Toggle>
               </Dropdown>
 
-              <select multiple>
+              <select className="form-control">
                 {options2.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
@@ -87,13 +100,21 @@ const List: React.FC<ListProps> = ({ selected }) => {
               }}
             >
               <Dropdown>
-                <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                <Dropdown.Toggle
+                  variant="none"
+                  className="form-control"
+                  id="dropdown-basic"
+                >
                   Amount
                 </Dropdown.Toggle>
               </Dropdown>
 
-              <input type="number" placeholder="From" />
-              <input type="number" placeholder="To" />
+              <input
+                type="number"
+                placeholder="From"
+                className="form-control"
+              />
+              <input type="number" placeholder="To" className="form-control" />
             </div>
           );
         } else if (item === "Date") {
@@ -107,13 +128,17 @@ const List: React.FC<ListProps> = ({ selected }) => {
               }}
             >
               <Dropdown>
-                <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                <Dropdown.Toggle
+                  variant="none"
+                  className="form-control"
+                  id="dropdown-basic"
+                >
                   Date
                 </Dropdown.Toggle>
               </Dropdown>
 
-              <input type="date" value={Date.now()} />
-              <input type="date" value={Date.now()} />
+              <input type="date" className="form-control" />
+              <input type="date" className="form-control" />
             </div>
           );
         } else {
